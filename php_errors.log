@@ -1,0 +1,24 @@
+[28-Feb-2017 13:33:12 UTC] PHP Warning:  require_once(/utilities/connect.php): failed to open stream: No such file or directory in /home/ubuntu/workspace/tools/login.php on line 2
+[28-Feb-2017 13:33:12 UTC] PHP Stack trace:
+[28-Feb-2017 13:33:12 UTC] PHP   1. {main}() /home/ubuntu/workspace/tools/login.php:0
+[28-Feb-2017 13:33:12 UTC] PHP Fatal error:  require_once(): Failed opening required '/utilities/connect.php' (include_path='.:/usr/share/php:/usr/share/pear') in /home/ubuntu/workspace/tools/login.php on line 2
+[28-Feb-2017 13:33:12 UTC] PHP Stack trace:
+[28-Feb-2017 13:33:12 UTC] PHP   1. {main}() /home/ubuntu/workspace/tools/login.php:0
+[28-Feb-2017 13:34:34 UTC] PHP Warning:  require_once(/home/ubuntu/workspace/tools/utilities/connect.php): failed to open stream: No such file or directory in /home/ubuntu/workspace/tools/login.php on line 2
+[28-Feb-2017 13:34:34 UTC] PHP Stack trace:
+[28-Feb-2017 13:34:34 UTC] PHP   1. {main}() /home/ubuntu/workspace/tools/login.php:0
+[28-Feb-2017 13:34:34 UTC] PHP Fatal error:  require_once(): Failed opening required '/home/ubuntu/workspace/tools/utilities/connect.php' (include_path='.:/usr/share/php:/usr/share/pear') in /home/ubuntu/workspace/tools/login.php on line 2
+[28-Feb-2017 13:34:34 UTC] PHP Stack trace:
+[28-Feb-2017 13:34:34 UTC] PHP   1. {main}() /home/ubuntu/workspace/tools/login.php:0
+[28-Feb-2017 13:35:11 UTC] PHP Parse error:  syntax error, unexpected 'funtion' (T_STRING), expecting variable (T_VARIABLE) in /home/ubuntu/workspace/utilities/usermodel.php on line 28
+[28-Feb-2017 13:35:11 UTC] PHP Stack trace:
+[28-Feb-2017 13:35:11 UTC] PHP   1. {main}() /home/ubuntu/workspace/tools/login.php:0
+[28-Feb-2017 13:35:31 UTC] PHP Parse error:  syntax error, unexpected 'funtion' (T_STRING), expecting variable (T_VARIABLE) in /home/ubuntu/workspace/utilities/usermodel.php on line 38
+[28-Feb-2017 13:35:31 UTC] PHP Stack trace:
+[28-Feb-2017 13:35:31 UTC] PHP   1. {main}() /home/ubuntu/workspace/tools/login.php:0
+[06-Mar-2017 14:14:51 UTC] PHP Warning:  require_once(./utilities/connect.php): failed to open stream: No such file or directory in /home/ubuntu/workspace/tools/login.php on line 2
+[06-Mar-2017 14:14:51 UTC] PHP Stack trace:
+[06-Mar-2017 14:14:51 UTC] PHP   1. {main}() /home/ubuntu/workspace/tools/login.php:0
+[06-Mar-2017 14:14:51 UTC] PHP Fatal error:  require_once(): Failed opening required './utilities/connect.php' (include_path='.:/usr/share/php:/usr/share/pear') in /home/ubuntu/workspace/tools/login.php on line 2
+[06-Mar-2017 14:14:51 UTC] PHP Stack trace:
+[06-Mar-2017 14:14:51 UTC] PHP   1. {main}() /home/ubuntu/workspace/tools/login.php:0
