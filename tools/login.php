@@ -17,7 +17,7 @@
         $SQL_QUERY_LOGIN_CHECK_DEC = "SELECT Username FROM USERS WHERE Username = '".$USERNAME_LOWER."' AND UserPassword = '".$ENCRYPTED_PASSWORD."';";
         $SQL_QUERY_LOGIN_CHECK = $connection->query($SQL_QUERY_LOGIN_CHECK_DEC);
         $SQL_QUERY_LOGIN_CHECK_ROWS = $SQL_QUERY_LOGIN_CHECK->num_rows;
-        
+
         if($SQL_QUERY_LOGIN_CHECK_ROWS == 1) {
             $_SESSION['activeuser'] = UserClass::fromUsername($USERNAME_LOWER);
             $connection->close();
