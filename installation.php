@@ -21,6 +21,10 @@
     if ($SQL_DATABASE_NAME != "") {
         $SQL_DATABASE_QUERY_DEC = "CREATE DATABASE ".$SQL_DATABASE_NAME.";";
         $SQL_DATABASE_QUERY = $connection->query($SQL_DATABASE_QUERY_DEC);
+    }else{
+        echo "Please update the ".'$SQL_DATABASE_NAME'." variable in installation.php";
+        $connection->close();
+        die();
     }
     $SQL_QUERY_USE_DB_DEC = "USE ".$SQL_DATABASE_NAME.";";
     $SQL_QUERY_USE_DB = $connection->query($SQL_QUERY_USE_DB_DEC);
@@ -38,4 +42,5 @@
             echo "Installation Successful. Refer back to the README for the next step.";
         }
     }
+    $connection->close();
 ?>
