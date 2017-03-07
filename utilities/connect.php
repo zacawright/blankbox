@@ -6,9 +6,9 @@
     */
     
     $SQL_SERVER_ADRRESS  = "127.0.0.1";
-    $SQL_SERVER_USERNAME = "zacawright";
+    $SQL_SERVER_USERNAME = "h2n0954";
     $SQL_SERVER_PASSWORD = "";
-    $SQL_SERVER_DATABASE = "blankbox";
+    $SQL_SERVER_DATABASE = "";
     
     /*
         End of editable area

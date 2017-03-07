@@ -1,12 +1,13 @@
 <?php
 
     require_once("utilities/connect.php");
+    
     /*
         Editable Area Start
         Only edit lines 7,9,10,11
     */
     
-    $SQL_DATABASE_NAME     = "blankbox";
+    $SQL_DATABASE_NAME     = "";
     
     $USER_TABLE_ADMINNAME  = "zac";
     $USER_TABLE_ADMINPASS  = "zac";
@@ -18,29 +19,84 @@
     */
     global $connection;
     
-    if ($SQL_DATABASE_NAME != "") {
-        $SQL_DATABASE_QUERY_DEC = "CREATE DATABASE ".$SQL_DATABASE_NAME.";";
+    function doesDBExist(){
+        if($SQL_DATABASE_NAME == ""){
+            return false;
+        }
+        
+        global $connection;
+        $SQL_DATABASE_QUERY_DEC = "SHOW DATABASES LIKE '".$SQL_DATABASE_NAME."';";
         $SQL_DATABASE_QUERY = $connection->query($SQL_DATABASE_QUERY_DEC);
-    }else{
-        echo "Please update the ".'$SQL_DATABASE_NAME'." variable in installation.php";
-        $connection->close();
-        die();
+        if($SQL_DATABASE_QUERY->num_rows == 0){
+            return false;
+        }else{
+            return true;
+        }
     }
-    $SQL_QUERY_USE_DB_DEC = "USE ".$SQL_DATABASE_NAME.";";
-    $SQL_QUERY_USE_DB = $connection->query($SQL_QUERY_USE_DB_DEC);
     
-    $SQL_QUERY_CREATE_USER_TABLE_DEC = "CREATE TABLE USERS(UserID int AUTO_INCREMENT PRIMARY KEY, Username varchar(64) NOT NULL, UserPassword varchar(32) NOT NULL, UserEmail varchar(64) NOT NULL);";
-    $SQL_QUERY_CREATE_USER_TABLE = $connection->query($SQL_QUERY_CREATE_USER_TABLE_DEC);
+    if(isset($_GET["step"])){
+        $step = $_GET["step"];
+        if($step == 1){//User has entered admin details, just need database name
+            if(isset($_POST["an"]) && isset($_POST["ap"]) && isset($_POST["ae"])){// Previous form was filled in and hasn't ended up here by chance
+                
+            }else{// Redirect them to step 0 I guess with some additonal warings
+                header("Location: ./installation.php?w=order");
+            }
+        }
+    }else{// If step not set check if db exists and set default to 1
+        if(doesDBExist()){
+            echo nl2br("Database already exsists!\n");
+            echo "Install either completed or conflicting ".'$SQL_DATABASE_NAME'." values.";
+            header("Location: ./installation.php?w=comp");
+            $connection->close();
+            die();
+        }else{
+            printHTMLTop();
+            if(isset($_GET["w"])){
+                $warning = $_GET["w"];
+                if($warning == "comp"){
+                    printWarning("Looks like you've already completed the installation");
+                }else if($warning == "order"){
+                  //  echo "<div class='warning'>You need to complete the installation in the correct order, please try again</div>";
+                }
+            }
+            echo "<div class='container'>";
+            echo "<h1>Blank Box</h1>";
+            echo "<form action='?step=1' method='post'>";
+                echo "<input name='au' type='text' placeholder='Admin username'/></br></br>";
+                echo "<input name='ap' type='password' placeholder='Admin password'/></br></br>";
+                echo "<input name='ae' type='email' placeholder='Admin email'/></br></br>";
+                echo "<input type='submit' value='Create user'/>";
+            echo "</form>";
+            echo "</div>";
+            printHTMLBottom();
+        }
+    }
     
-    if(($USER_TABLE_ADMINNAME != "")
-    && ($USER_TABLE_ADMINPASS != ""
-    && ($USER_TABLE_ADMINEMAIL != ""))) {
-        $USER_TABLE_ADMINNAME = strtolower($USER_TABLE_ADMINNAME);
-        $SQL_QUERY_INSERT_DATA_DEC = "INSERT INTO USERS (Username, UserPassword, UserEmail) VALUES ('$USER_TABLE_ADMINNAME','".md5($USER_TABLE_ADMINPASS)."','".$USER_TABLE_ADMINEMAIL."');";
-        $SQL_QUERY_INSERT_DATA = $connection->query($SQL_QUERY_INSERT_DATA_DEC);
-        if($SQL_QUERY_INSERT_DATA) {
-            echo "Installation Successful. Refer back to the README for the next step.";
+    if ($SQL_DATABASE_NAME != "") {
+        if(!doesDBExist()){
+            $SQL_DATABASE_QUERY_DEC = "CREATE DATABASE ".$SQL_DATABASE_NAME.";";
+            $SQL_DATABASE_QUERY = $connection->query($SQL_DATABASE_QUERY_DEC);
         }
     }
     $connection->close();
+    
+    function printWarning($w){
+        echo "<div id='warn' class='warning'>".$w."</div>";
+        echo "<script>setTimeout(function(){document.getElementById('warn').classList.add('hidden');},3000)</script>";
+    }
+    
+    function printHTMLTop(){
+        echo "<html>";
+        echo "<head>";
+        echo "<title>Blank Box - Installation</title>";
+        echo "<link rel='stylesheet' type='text/css' href='../assets/style.css'/>";
+        echo "</head>";
+        echo "<body>";
+    }
+    
+    function printHTMLBottom(){
+        echo "</body>";
+        echo "</html>";
+    }
 ?>
