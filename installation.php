@@ -1,6 +1,7 @@
 <?php
 
     require_once("utilities/connect.php");
+    require_once("utilities/usermodel.php");
     /*
         Editable Area Start
         Only edit lines 7,9,10,11
