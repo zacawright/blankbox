@@ -19,12 +19,13 @@
         $SQL_QUERY_LOGIN_CHECK = $connection->query($SQL_QUERY_LOGIN_CHECK_DEC);
         $SQL_QUERY_LOGIN_CHECK_ROWS = $SQL_QUERY_LOGIN_CHECK->num_rows;
         
+        $connection->close();
+        
         
         if($SQL_QUERY_LOGIN_CHECK_ROWS == 1) {
             $_SESSION['activeuser'] = $usermodel::fromUsername($USERNAME_LOWER);
             
             header("location: ../index.php");
-            
         } else {
             echo "username or password fail";
         }
