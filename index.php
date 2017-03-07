@@ -1,20 +1,26 @@
 <?php
-
-    
-    require_once("utilities/usermodel.php");
     require_once("utilities/connect.php");
+    require_once("utilities/usermodel.php");
     
-    if(!isset($_SESSION['activeuser'])) {
-        echo "<form action='tools/login.php' method='post'>";
-        echo "<input name='username' id='username' type='text' placeholder='Username'>";
-        echo "<input name='password' id='password' type='password' placeholder='Password'>";
-        echo "<button type='submit'>Login</button>";
-        echo "</form>";
-    } else {
-        
-    }
+    
+    session_start();
 
 ?>
 <html>
-    
+    <?php
+    if(!isset($_SESSION['activeuser'])) {
+    ?>
+        <form action='tools/login.php' method='post'>
+        <input name='username' id='username' type='text' placeholder='Username'>
+        <input name='password' id='password' type='password' placeholder='Password'>
+        <button type='submit'>Login</button>
+        </form>
+        <?php
+    } else {
+    ?>
+        
+    <?php
+    var_dump($_SESSION['activeuser']);
+    }    
+    ?>
 </html>

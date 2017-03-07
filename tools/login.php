@@ -1,7 +1,9 @@
 <?php
-    require_once("../utilities/usermodel.php");
     require_once("../utilities/connect.php");
+    require_once("../utilities/usermodel.php");
+    
 
+    session_start();
 //public static function checkLogin($username, $password) {
 
     if(isset($_POST['username']) && isset($_POST['password'])) {
@@ -19,7 +21,6 @@
         
         
         if($SQL_QUERY_LOGIN_CHECK_ROWS == 1) {
-            header("location: ../index.php");
             $_SESSION['activeuser'] = User::fromUsername($USERNAME_LOWER);
             
         } else {

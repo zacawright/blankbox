@@ -4,6 +4,7 @@
     */
     
     require_once("connect.php");
+    session_start();
     
     class User {
         
