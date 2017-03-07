@@ -31,4 +31,9 @@ Open the 'installation.php' file in a text editor. This is located in the home d
 Edit lines 7,9,10 and 11 to match the information you want. Line 7 is the database name. Line 9,10 and 11 is the login information for your account.
 (You choose the login information)
 
+-- Stage Five --
+
+Visit the installation.php page in your browser and if everything has worked correctly it will tell you to refer back here.
+Now in Stage Two we left the $SQL_SERVER_DATABASE variable blank. Head back to that document in a text editor and input the name of your database you used in Stage Four.
+
 /* How to use */
