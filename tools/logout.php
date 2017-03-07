@@ -1,7 +1,6 @@
 <?php
 	//  Initializing core modules
 	require_once("../utilities/connect.php");
-	require_once("../utilities/usermodel.php");
 	//  Core session start
 	session_start();
 	//  Resetting $_SESSION array

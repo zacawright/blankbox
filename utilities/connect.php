@@ -17,6 +17,12 @@
     
     $connection = new mysqli($SQL_SERVER_ADRRESS, $SQL_SERVER_USERNAME, $SQL_SERVER_PASSWORD, $SQL_SERVER_DATABASE);
     
+    function fileAutoload($class) {
+        include(__DIR__ . "/" . $pClassName . ".php");
+    }
+    
+    spl_autoload_register("fileAutoload");
+    
 
     if(!$connection) { 
         echo "server_init_failed";
