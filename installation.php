@@ -1,4 +1,6 @@
 <?php
+
+    require_once("utilities/connect.php");
     /*
         Editable Area Start
         Only edit lines 7,9,10,11
@@ -14,7 +16,6 @@
         Editable Area Finish
         Do NOT edit anything after this line
     */
-    require_once("utilities/connect.php");
     global $connection;
     
     if ($SQL_DATABASE_NAME != "") {

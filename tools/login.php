@@ -22,6 +22,7 @@
         
         if($SQL_QUERY_LOGIN_CHECK_ROWS == 1) {
             $_SESSION['activeuser'] = User::fromUsername($USERNAME_LOWER);
+            header("location: ../index.php");
             
         } else {
             echo "username or password fail";
