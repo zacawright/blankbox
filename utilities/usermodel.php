@@ -6,7 +6,7 @@
     require_once("connect.php");
     session_start();
     
-    class User {
+    class UserClass {
         
         public $UserID;
         public $Username;
@@ -29,7 +29,7 @@
             $SQL_SELECT_QUERY = $connection->query($SQL_SELECT_QUERY_DEC);
             $SQL_SELECT_QUERY_ROWS = $SQL_SELECT_QUERY->fetch_assoc();
             if(!$SQL_SELECT_QUERY_ROWS) { return "no_data"; }
-            else { return User::fromDBRow($SQL_SELECT_QUERY_ROWS); }
+            else { return self::fromDBRow($SQL_SELECT_QUERY_ROWS); }
         }
         
         public static function fromUsername($USERNAME) {
@@ -40,7 +40,7 @@
             $SQL_SELECT_QUERY_ROWS = $SQL_SELECT_QUERY->fetch_assoc();
             
             if(!$SQL_SELECT_QUERY_ROWS) { return "no_data"; }
-            else { return User::fromDBRow($SQL_SELECT_QUERY_ROWS); }
+            else { return self::fromDBRow($SQL_SELECT_QUERY_ROWS); }
         }
     }
 ?>

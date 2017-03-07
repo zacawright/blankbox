@@ -15,6 +15,7 @@
         Do NOT edit any lines after this
     */
     
+
     if($SQL_SERVER_DATABASE == ""){
         $connection = new mysqli($SQL_SERVER_ADRRESS, $SQL_SERVER_USERNAME, $SQL_SERVER_PASSWORD);
     }else{

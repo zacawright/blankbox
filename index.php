@@ -2,9 +2,7 @@
     require_once("utilities/connect.php");
     require_once("utilities/usermodel.php");
     
-    
     session_start();
-
 ?>
 <html>
     <?php
@@ -17,10 +15,9 @@
         </form>
         <?php
     } else {
-    ?>
-        
-    <?php
-    var_dump($_SESSION['activeuser']);
+        echo $_SESSION['activeuser']->UserID.", ";
+        echo $_SESSION['activeuser']->Username.", ";
+        echo $_SESSION['activeuser']->UserEmail;
     }    
     ?>
 </html>
