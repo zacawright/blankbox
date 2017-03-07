@@ -1,6 +1,7 @@
 body{
     background-color: #335;
     font-family: Arial, Helvetica, sans-serif;
+    color: #FFF;
 }
 
 .warning{
@@ -17,6 +18,8 @@ body{
     left: calc(50% - 200px - 1px);
     transition: opacity 2s;
     opacity: 1;
+    color: #000;
+    z-index: 999;
 }
 
 .warning.hidden{
@@ -26,9 +29,11 @@ body{
 div.container{
     width: 50%;
     margin: 0 auto;
+    padding-top: 20px;
 }
 
 div.container h1{
     font-size: 32px;
     color: #FFF;
+    text-align: center;
 }
