@@ -6,7 +6,7 @@
     */
     
    $SQL_SERVER_ADRRESS = "127.0.0.1";
-   $SQL_SERVER_USERNAME = "test";
+   $SQL_SERVER_USERNAME = "";
    $SQL_SERVER_PASSWORD = "";
    $SQL_SERVER_DATABASE = "";
     
@@ -26,6 +26,7 @@
         die("server_init_failed");
     }
 ?>
+
 
 
 
