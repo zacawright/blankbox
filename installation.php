@@ -1,6 +1,6 @@
 <?php
 
-    require_once("utilities/connect.php");
+    require_once("./utilities/connect.php");
     
     global $connection;
     global $SQL_SERVER_DATABASE;
@@ -24,7 +24,6 @@
                 echo "</form>";
                 printHTMLBottom();
             }else{// Redirect them to step 0 I guess with some additonal warings
-                $connection->close();
                 header("Location: ./installation.php?w=order");
             }
         }else if($step == 2){// User is entering server connection details
@@ -74,24 +73,32 @@
                     die();
                 }else{
                     fclose($file);
+                    
+                    $connection = getConnection();
                     $SQL_DATABASE_NAME = $_POST["dbn"];
                     $SQL_DATABASE_QUERY_DEC = "CREATE DATABASE ".$SQL_DATABASE_NAME.";";
                     $SQL_DATABASE_QUERY = $connection->query($SQL_DATABASE_QUERY_DEC);
                     
                     $connection->select_db($_POST["dbn"]);
                     $SQL_QUERY_CREATE_USER_TABLE_DEC = "CREATE TABLE USERS(UserID int AUTO_INCREMENT PRIMARY KEY, Username varchar(64) NOT NULL, UserPassword varchar(32) NOT NULL, UserEmail varchar(64) NOT NULL);";
-                    $SQL_QUERY_CREATE_USER_TABLE = $connection->query($SQL_QUERY_CREATE_USER_TABLE_DEC);
+                    if(! $SQL_QUERY_CREATE_USER_TABLE = $connection->query($SQL_QUERY_CREATE_USER_TABLE_DEC)){
+                        echo "Failed to create table";
+                        die();
+                    }
                     
                     $USER_TABLE_ADMINNAME = strtolower($_COOKIE["au"]);
                     $USER_TABLE_ADMINPASS = ($_COOKIE["ap"]);
                     $USER_TABLE_ADMINEMAIL = $_COOKIE["ae"];
                     
                     $SQL_QUERY_INSERT_DATA_DEC = "INSERT INTO USERS (Username, UserPassword, UserEmail) VALUES ('$USER_TABLE_ADMINNAME','".md5($USER_TABLE_ADMINPASS)."','".$USER_TABLE_ADMINEMAIL."');";
-                    $SQL_QUERY_INSERT_DATA = $connection->query($SQL_QUERY_INSERT_DATA_DEC);
-                    if($SQL_QUERY_INSERT_DATA) {
+                    if( $SQL_QUERY_INSERT_DATA = $connection->query($SQL_QUERY_INSERT_DATA_DEC)){
                         echo "Installation Successful. Refer back to the README for the next step.";
+                    }else{
+                        echo "Failed to insert user into table";
+                        $connection->close();
+                        die();
                     }
-                    
+                    $connection->close();
                     wipeCookies();
                     header("Location: ./installation.php?w=comp&step=4");
                 }
@@ -107,8 +114,9 @@
                     printWarning("Tada! Blank Box is setup!");
                 }
             }
-            echo "<p>Successfully setup blankbox database</p>";
-            echo "<p>You should be able to use the site now</p>";
+            echo "<p>You will be redirected to the home page now</p>";
+            echo "<p>If nothing happens, click <a href='index.php'>here</a></p>";
+            echo "<script>setTimeout(function(){window.location='./index.php'}, 5000);</script>";
             printHTMLBottom();
         }
     }else{// If step not set check if db exists and set default to 1
@@ -135,7 +143,6 @@
             printHTMLBottom();
         }
     }
-    $connection->close();
     
     /**
      *  Easy function to add warnings upon a user error
@@ -152,7 +159,7 @@
         echo "<html>";
         echo "<head>";
         echo "<title>Blank Box - Installation</title>";
-        echo "<link rel='stylesheet' type='text/css' href='../assets/style.css'/>";
+        echo "<link rel='stylesheet' type='text/css' href='./../assets/style.css'/>";
         echo "</head>";
         echo "<body>";
         echo "<div class='container'>";
@@ -178,23 +185,5 @@
         setCookie("au", "", time() - 3600);
         setCookie("ap", "", time() - 3600);
         setCookie("ae", "", time() - 3600);
-    }
-    
-    /**
-     *  Checks if the DB already exists
-     **/
-    function doesDBExist(){
-        global $SQL_SERVER_DATABASE;
-        global $connection;
-        if($SQL_SERVER_DATABASE == ""){
-            return false;
-        }
-        $SQL_DATABASE_QUERY_DEC = "SHOW DATABASES LIKE '".$SQL_SERVER_DATABASE."';";
-        $SQL_DATABASE_QUERY = $connection->query($SQL_DATABASE_QUERY_DEC);
-        if($SQL_DATABASE_QUERY->num_rows == 0){
-            return false;
-        }else{
-            return true;
-        }
     }
 ?>
