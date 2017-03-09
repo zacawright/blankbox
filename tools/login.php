@@ -1,6 +1,6 @@
 <?php
-    require_once("../utilities/connect.php");
-    require_once("../utilities/usermodel.php");
+    require_once("./../utilities/connect.php");
+    require_once("./../utilities/usermodel.php");
     
     session_start();
 //public static function checkLogin($username, $password) {
@@ -9,7 +9,7 @@
         $username = $_POST['username'];
         $password = $_POST['password'];
         
-        global $connection;
+        $connection = getConnection();
         
         $USERNAME_LOWER = strtolower($username);
         $ENCRYPTED_PASSWORD = md5($password);
@@ -24,6 +24,7 @@
             header("location: ../index.php");
             
         } else {
+            $connection->close();
             echo "username or password fail";
         }
     } else {
