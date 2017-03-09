@@ -159,7 +159,7 @@
         echo "<html>";
         echo "<head>";
         echo "<title>Blank Box - Installation</title>";
-        echo "<link rel='stylesheet' type='text/css' href='./../assets/style.css'/>";
+        echo "<link rel='stylesheet' type='text/css' href='./assets/style.css'/>";
         echo "</head>";
         echo "<body>";
         echo "<div class='container'>";
